@@ -44,3 +44,29 @@ SES_PASSWORD=
 SES_DOMAIN=
 MAILER_FROM_ADDRESS=
 ```
+
+## Running the update checker
+
+```sh
+docker-compose run app rake check:all
+```
+
+## Running tests
+
+To run all tests:
+
+```sh
+docker-compose run -e "DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true" app rake spec
+```
+
+To run tests in a specific file:
+
+```sh
+docker-compose run -e "DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true" app rake spec spec/path/to/spec.rb
+```
+
+To run tests with a specific task (e.g. all page tests mentioning "exclude"):
+
+```sh
+docker-compose run -e "DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true" app rake spec SPEC=spec/models/page_spec.rb SPEC_OPTS="-e exclude"
+```
